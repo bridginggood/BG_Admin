@@ -1,4 +1,10 @@
 Admin::Application.routes.draw do
+	match '/' => 'main#index', :via => :get
+	match '/login' => 'main#doLogin', :via => :post
+	match '/login' => 'main#login', :via => :get
+	match '/logout' => 'main#doLogout', :via => :post
+	match '/qrinfo' => 'qrinfo#index', :via => :get
+
   # The priority is based upon order of creation:
   # first created -> highest priority.
 

@@ -1,0 +1,36 @@
+<h1>Listing QRCodes</h1>
+
+<%= will_paginate(@qrinfo) %>
+<table border="1">
+	<tr>
+		<th>No.</th>
+		<th>Thumbnail</th>
+		<th>QR code</th>
+		<th>User Id</th>
+		<th>In Use</th>
+		<th>Created at</th>
+		<th>Created by</th>
+		<th>S3 URL</th>
+	</tr>
+	
+	<% 
+	page = (params[:page].nil?)?1:params[:page]
+	page = Integer(page)
+	i = (page-1)*10+1
+	@qrinfo.each do |qr| %>
+	<tr>
+		<td><%= i %></td>
+		<td><img src="https://s3.amazonaws.com/BG_DEV_S3/media/qrcode/<%= qr.QrId %>.png" width="75px"></td>
+		<td><%= qr.QrId.gsub(/(.{4})(?=.)/, '\1-') %></td>
+		<td><%= qr.UserId %></td>
+		<td><%= qr.InUse %></td>
+		<td><%= qr.CreatedAt %></td>
+		<td><%= qr.CreatedBy %></td>
+		<td><a href="https://s3.amazonaws.com/BG_DEV_S3/media/qrcode/<%= qr.QrId %>.png">Open</a></td>
+	</tr>
+	<% i = i + 1
+	end %>
+</table>
+<br>
+
+	
